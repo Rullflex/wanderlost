@@ -1,0 +1,25 @@
+$relative-link-to-modules: "../../modules/fonts";
+
+@include font("F", "F-Thin", "100", "normal");
+
+@include font("F", "F-ExtraLight", "200", "normal");
+@include font("F", "F-UltraLight", "200", "normal");
+@include font("F", "F-Thin", "200", "normal");
+
+@include font("F", "F-Light", "300", "normal");
+
+@include font("F", "F", "400", "normal");
+@include font("F", "F-Normal", "400", "normal");
+@include font("F", "F-Regular", "400", "normal");
+
+@include font("F", "F-Medium", "500", "normal");
+
+@include font("F", "F-SemiBold", "600", "normal");
+
+@include font("F", "F-Bold", "700", "normal");
+
+@include font("F", "F-ExtraBold", "800", "normal");
+@include font("F", "F-UltraBold", "800", "normal");
+@include font("F", "F-Heavy", "800", "normal");
+
+@include font("F", "F-Black", "900", "normal");

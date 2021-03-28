@@ -1,0 +1,17 @@
+header.header
+    .container 
+        .header__row
+            a.header__logo(href="/")
+                picture
+                    source(srcset!=`${modules}logo@2x.webp 2x, ${modules}logo.webp 1x` type=`image/webp`)
+                    source(srcset!=`${modules}.logo@2x.jpg 2x, ${modules}logo.jpg 1x` type=`image/jpg`)
+                    img(src=`${modules}logo.jpg` alt='')
+            a.header__discord(href="/" target="_blank")
+                +icon('discord')
+                span Join Discord 
+            a.header__lang(href="#")
+                span EN
+                +icon('triangle-down')
+
+
+

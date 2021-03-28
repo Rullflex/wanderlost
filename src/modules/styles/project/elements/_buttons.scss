@@ -1,0 +1,48 @@
+.uk-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    
+    transition: $transition--hover;
+
+}
+
+.btn {
+    &-solid {
+        @mixin btn-solid($btn-color, $font-color) {
+            background: $btn-color;
+            color: $font-color;
+            &:active {}
+            @media (min-width: map-get($grid-breakpoints, lg)) {
+                &:hover {}
+            }
+        }
+        // &-primary {
+        //     @include btn-solid($primary, $text-light);
+        // }
+        // &-muted {
+        //     @include btn-solid($muted, $text-light);
+        // }
+    }
+    &-outline {
+        @mixin btn-outline($btn-color) {
+            border: 0.0625rem solid $btn-color;
+            background: transparent;
+            color: $btn-color;
+            &:active {
+                background: $btn-color;
+                color: $text-light;
+            }
+            @media (min-width: map-get($grid-breakpoints, lg)) {
+                &:hover {
+                    background: $btn-color;
+                    color: $text-light;
+                }
+            }
+        }
+        // &-primary {
+        //     @include btn-outline($primary);
+        // }
+    }
+}

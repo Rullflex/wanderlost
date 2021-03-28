@@ -1,0 +1,8 @@
+@function link-hover($color) {
+    @return lighten($color, 15%);
+}
+// y = kx + b измением выходной параметр в зависимости от изменяемого x
+@function linear-progression($coef, $x, $startPoint) {
+    $result: calc($coef * $x + $startPoint);
+    @return $result;
+}

@@ -1,0 +1,37 @@
+// Предкомпилированная кухня
+
+@import "../../modules/styles/utils/functions";
+@import "../../modules/styles/utils/mixins";
+@import "../../modules/styles/utils/variables";
+@import "../../modules/styles/utils/placeholders";
+
+// Настройка внешних библиотек
+
+/* disabled modules {
+    BASE: base, 
+    ELEMENTS: heading, list, description-list, table, progress
+    LAYOUT: section, container, tile, card, 
+    JS: offcanvas, notification, tooltip, countdown, 
+    grid, 
+    NAVS: breadcrumb, 
+    lightbox, 
+    UTILITIES: width, height, text, column, background, align, margin, padding, position
+}*/
+@import "../../modules/styles/libraries/uikit";
+
+// Базовый нормальный стиль и общие утилиты
+
+// @import "../../modules/styles/core/normalize"; // normalize включен в uikit
+@import "../../modules/styles/core/animations";
+@import "./typography"; //(проверить пути)
+@import "../../modules/styles/core/base";
+@import "../../modules/styles/core/grid"; // bootstrap grid, сетка также есть в uikit, но пока не использую
+@import "../../modules/styles/core/utilities";
+
+
+// Стили приложения {widgets}(проверить пути)
+
+@import "../../modules/styles/project/elements";
+@import "../../modules/styles/project/widgets";
+@import "./layout";
+@import "./fixes";

@@ -1,0 +1,319 @@
+.container {
+    max-width: 1150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 980px;
+    height: 263px;
+    background: rgba(102, 161, 91, 0.33);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(35px);
+    /* Note: backdrop-filter has minimal browser support */
+    
+    border-radius: 15px;
+    overflow: hidden;
+    &__ibg {
+        width: 100%;
+        height: 100%;
+        @include center-item();
+        &::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            position: absolute;            
+            background: rgba(102, 161, 91, 0.5);
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(45px);
+            /* Note: backdrop-filter has minimal browser support */
+            
+        }
+    }
+    &__title {
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 30px;
+        text-align: center;
+        margin-top: 45px;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 3;
+    }
+    &__input {
+        width: 754px;
+        height: 78px;
+        padding-left: 32px;
+        
+        background: #FFFFFF;
+        border: 3px solid rgba(255, 255, 255, 0.35);
+        box-sizing: border-box;
+        border-radius: 20px;
+
+        font-weight: 500;
+        font-size: 22px;
+        color: $text-dark;
+        &-wrap {
+            position: relative;
+        }
+    }
+    &__btn {
+        width: 227px;
+        height: 64px;
+
+        background: $primary;
+        border-radius: 20px;
+        box-shadow: 0px 2px 0px #B53405;
+
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        
+
+        @include center-item-y();
+        right: 5px;
+    }
+}
+.header {
+    &__row {
+        height: 95px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__logo {
+        width: 225px;
+        height: 92px;
+        img {
+            width: 100%;
+        }
+    }
+    &__discord {
+        padding: 0 29px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: #708AD7;
+        border-radius: 37px;
+
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 37px;
+        letter-spacing: 0.11em;
+        text-transform: capitalize;
+        color: #FFFFFF;
+
+        margin-right: 140px;
+        svg {
+            display: block;
+            margin-right: 10px;
+        }
+    }
+    &__lang {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 85px;
+        height: 47px;
+
+        border: 3px solid #E6450B;
+        border-radius: 10px;
+
+        color: $primary;
+        font-weight: bold;
+        font-size: 18px;
+        letter-spacing: 0.16em;
+        svg {
+            display: block;
+            margin-left: 6px;
+        }
+    }
+    background: #F8F8F8;
+}
+.s1 {
+    height: calc(100vh - 95px - 80px);
+    min-height: 747px;
+    &__ibg {
+        width: 100%;
+        height: 100%;
+        @include center-item();
+        z-index: -3;
+    }
+    &__ctn {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    &__play {
+        &-btn {
+            filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.35));
+            position: relative;
+        }
+        &-text {
+            margin-top: 14px;
+            font-weight: 500;
+            font-size: 17px;
+        }
+    }
+    &__btn {
+        text-transform: uppercase;
+        position: relative;
+        margin-top: 43px;
+        width: 331.5px;
+        height: 93px;
+        svg {
+            width: 100%;
+            height: 100%;
+            @include center-item();
+            filter: drop-shadow(2.5px 2.5px 2px rgba(0, 0, 0, 0.4));
+        }
+        span {
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 27px;
+            letter-spacing: 0.16em;
+            position: relative;
+            z-index: 2;
+        }
+    }
+    &__icons {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        width: 151px;
+        a {
+            &:not(:last-child) {
+                border-radius: 50%;
+                overflow: hidden;
+            }
+        }
+    }
+    .form {
+        bottom: -74px;
+        @include center-item-x();
+    }
+}
+.s2 {
+    padding-top: 175px;
+    padding-bottom: 100px;
+    &__playgrounds {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 100px;
+    }
+    &__title {
+        font-family: 'ToJapan';
+        font-size: 35px;
+        margin-bottom: 43px;
+    }
+    &__subtitle {
+        font-weight: bold;
+        font-size: 30px;
+        margin-bottom: 44px;
+    }
+    &__descr {
+        max-width: 979px;
+        font-size: 20px;
+        line-height: 1.5em;
+        margin-bottom: 96px;
+    }
+    &__screenshots {
+        &-title {
+            font-family: 'ToJapan';
+            font-size: 45px;
+            margin-bottom: 45px;
+        }
+        &-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        &-item {
+            width: 350px;
+            height: 257px;
+            border: 3px solid #FFFFFF;
+            filter: drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.25));
+            border-radius: 20px;
+            margin-bottom: 41px;
+        }
+    }
+    &__btn {
+        width: 331.5px;
+        height: 93px;
+        text-transform: uppercase;
+        position: relative;
+        margin: 98px auto 100px;
+        svg {
+            width: 100%;
+            height: 100%;
+            @include center-item();
+            filter: drop-shadow(2.5px 2.5px 2px rgba(0, 0, 0, 0.4));
+        }
+        span {
+            padding-top: 3px;
+            font-weight: bold;
+            font-size: 19px;
+            line-height: 27px;
+            letter-spacing: 0.16em;
+            position: relative;
+            z-index: 2;
+        }
+    }
+    .form {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.footer {
+    &__social {
+        padding: 34px 0;
+        background: #E6EDEF;
+    }
+    &__icons {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        width: 151px;
+        a {
+            &:not(:last-child) {
+                border-radius: 50%;
+                overflow: hidden;
+            }
+        }
+    }
+    &__main {
+        padding: 60px 0;
+        background: #FFFFFF;
+    }
+    &__logo {
+        width: 225px;
+        height: 92px;
+        display: block;
+        margin: 0 auto 34px;
+        img {
+            width: 100%;
+        }
+    }
+    &__cred {
+        font-weight: bold;
+        font-size: 15px;
+        letter-spacing: 0.16em;
+        text-align: center;
+        color: #7A7A7A;
+        
+    }
+}

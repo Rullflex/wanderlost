@@ -1,0 +1,479 @@
+// Universal Typographic Mixin
+//////////////////////////////////////////////////////
+
+// We use one, only one, Karl, a universal mixin for all cases !!!!!!!!!!
+
+@mixin text($font-family, $font-size: 1rem, $font-weight: normal) {
+	font-family: $font-family;
+	font-size: $font-size;
+	font-weight: $font-weight;
+	letter-spacing: $normal-letter-spacing;
+  
+	@if $font-size == $font-size--large {
+	  line-height: $line-height--large;
+	} @else if $font-size == $font-size--normal {
+	  line-height: $line-height--normal;
+	} @else if $font-size == $font-size--small {
+	  line-height: $line-height--small;
+	} @else {
+	  line-height: floor($font-size * $line-height--base);
+	}
+}
+
+// Центрирование элемента внутри блока
+
+@mixin center-item ($position: absolute) {
+	position: $position; 
+	top: 50%; 
+	left: 50%; 
+	transform: translate(-50%, -50%);
+}
+@mixin center-item-y ($position: absolute) {
+	position: $position;
+	top: 50%; 
+	transform: translateY(-50%);
+};
+@mixin center-item-x ($position: absolute) {
+	position: $position;
+	left: 50%; 
+	transform: translateX(-50%);
+};
+@mixin center-item-undo ($top: unset, $left: unset, $transform: unset) {
+	top: $top;
+	left: $left;
+	transform: $transform;
+}
+
+@mixin adaptiv-font($pcSize, $mobSize, $maxContainerWidth) {
+	$addSize: $pcSize - $mobSize;
+	$maxContainerWidth: $maxContainerWidth - 320;
+	font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxContainerWidth}));
+}
+@mixin aFontMob($size, $maxContainerWidth: 420, $koef: 1.3, $startPoint: 320) {
+	$maxSize: $size * $koef;
+	@media (min-width: #{$maxContainerWidth + px}) {
+		font-size: #{$maxSize + px};
+	}
+	$addSize: $maxSize - $size;
+	$maxContainerWidth: $maxContainerWidth - $startPoint;
+	font-size: calc(#{$size + px} + #{$addSize} * ((100vw - #{$startPoint + px}) / #{$maxContainerWidth}));
+}
+@mixin aProp($prop, $startPoint, $koef: 0.3, $maxContainerWidth: 425, $minContainerWidth: 320) {
+	@media (min-width: #{$maxContainerWidth + px}) {
+		#{$prop}: calc(#{$koef} * (#{$maxContainerWidth + px} - #{$minContainerWidth + px}) + #{$startPoint});
+	}
+	#{$prop}: calc(#{$koef} * (100vw - #{$minContainerWidth + px}) + #{$startPoint});
+}
+@mixin bgi-cover($imgPath, $color) {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url($imgPath);
+	background-color: $color;
+}
+//bgi-html -- блок родитель имеет overflow: hidden; position: relative/absolute;
+@mixin bgi-html($minWidth) {
+	position: absolute;
+	margin: 0; 
+	top: 50%; 
+	left: 50%; 
+	margin-right: -50%; 
+	transform: translate(-50%, -50%);
+	width: 100%;
+	min-width: #{$minWidth + px};
+	min-height: 100%;
+	z-index: -1;
+}
+
+//@include beveled-corners(#58a, 15px, 5px); (цвет + 1-4 значения)
+@mixin beveled-corners($bg,
+$tl:0, $tr:$tl, $br:$tl, $bl:$tr) {
+background: $bg;
+background:
+linear-gradient(135deg, transparent $tl, $bg 0)
+top left,
+linear-gradient(225deg, transparent $tr, $bg 0)
+top right,
+linear-gradient(-45deg, transparent $br, $bg 0)
+bottom right,
+linear-gradient(45deg, transparent $bl, $bg 0)
+bottom left;
+background-size: 50% 50%;
+background-repeat: no-repeat;
+}
+@mixin clip-okt($ar, $w, $h) {
+	$w: $w - $ar;
+	$h: $h - $ar;
+	$ar: #{$ar + px};
+	$w: #{$w + px};
+	$h: #{$h + px};
+	-webkit-clip-path: polygon($ar 0, $w 0, 100% $ar, 100% $h, $w 100%, $ar 100%, 0% $h, 0% $ar);
+	clip-path: polygon($ar 0, $w 0, 100% $ar, 100% $h, $w 100%, $ar 100%, 0% $h, 0% $ar); 
+}
+@mixin clip-okt-frame($ar, $w, $h, $bw) {
+	$ow: $w - $ar;
+	$oh: $h - $ar;
+	$bar: $ar + ($bw * 0.4);
+	$iw: $w - $bar;
+	$ih: $h - $bar;
+	$ix: $w - $bw;
+	$iy: $h - $bw;
+
+	$ar: #{$ar + px};
+	$ow: #{$ow + px};
+	$oh: #{$oh + px};
+	$bar: #{$bar + px};
+	$iw: #{$iw + px};
+	$ih: #{$ih + px};
+	$bw: #{$bw + px};
+	$ix: #{$ix + px};
+	$iy: #{$iy + px};
+	-webkit-clip-path: polygon($ar 0, $ow 0, 100% $ar, 100% $oh, $ow 100%, $ar 100%, 0% $oh, $bw $ih, $bar $iy, $iw $iy, $ix $ih, $ix $bar, $iw $bw, $bar $bw, $bw $bar, $bw $ih, 0% $oh, 0% $ar);
+	clip-path: polygon($ar 0, $ow 0, 100% $ar, 100% $oh, $ow 100%, $ar 100%, 0% $oh, $bw $ih, $bar $iy, $iw $iy, $ix $ih, $ix $bar, $iw $bw, $bar $bw, $bw $bar, $bw $ih, 0% $oh, 0% $ar); 
+}
+
+@mixin font-face($font_name, $file_name, $weight, $style, $path: null) {
+	@font-face {
+		font-family: $font_name;
+		font-display: swap;
+		src: url("#{$path}/#{$file_name}.woff2") format("woff2"), url("#{$path}/#{$file_name}.woff") format("woff");
+		font-weight: #{$weight};
+		font-style: #{$style};
+	}
+}
+
+@mixin hover-bold($bold: bold, $fz: null) {
+	display: inline-flex;
+	flex-direction: column;
+	// align-items: center;
+
+	&::after {
+		content: attr(data-text);
+		content: attr(data-text) / "";
+		height: 0;
+		visibility: hidden;
+		overflow: hidden;
+		user-select: none;
+		pointer-events: none;
+		font-weight: $bold;
+		font-size: $fz;
+	}
+}
+
+@mixin bg($background: unset) {
+	&::before {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+
+		background: $background;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -20;
+	}
+}
+
+
+
+
+//bootstrap mixins
+
+/// Grid system
+//
+// Generate semantic grid columns with these mixins.
+
+@mixin make-container($gutter: $grid-gutter-width) {
+	width: 100%;
+	padding-right: $gutter / 2;
+	padding-left: $gutter / 2;
+	margin-right: auto;
+	margin-left: auto;
+  }
+  
+  
+  // For each breakpoint, define the maximum width of the container in a media query
+  @mixin make-container-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
+	@each $breakpoint, $container-max-width in $max-widths {
+	  @include media-breakpoint-up($breakpoint, $breakpoints) {
+		max-width: $container-max-width;
+	  }
+	}
+  }
+  
+  @mixin make-row($gutter: $grid-gutter-width) {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -$gutter / 2;
+	margin-left: -$gutter / 2;
+  }
+  
+  @mixin make-col-ready($gutter: $grid-gutter-width) {
+	position: relative;
+	// Prevent columns from becoming too narrow when at smaller grid tiers by
+	// always setting `width: 100%;`. This works because we use `flex` values
+	// later on to override this initial width.
+	width: 100%;
+	padding-right: $gutter / 2;
+	padding-left: $gutter / 2;
+  }
+  
+  @mixin make-col($size, $columns: $grid-columns) {
+	flex: 0 0 percentage($size / $columns);
+	// Add a `max-width` to ensure content within each column does not blow out
+	// the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+	// do not appear to require this.
+	max-width: percentage($size / $columns);
+  }
+  
+  @mixin make-col-auto() {
+	flex: 0 0 auto;
+	width: auto;
+	max-width: 100%; // Reset earlier grid tiers
+  }
+  
+  @mixin make-col-offset($size, $columns: $grid-columns) {
+	$num: $size / $columns;
+	margin-left: if($num == 0, 0, percentage($num));
+  }
+  
+  // Row columns
+  //
+  // Specify on a parent element(e.g., .row) to force immediate children into NN
+  // numberof columns. Supports wrapping to new lines, but does not do a Masonry
+  // style grid.
+  @mixin row-cols($count) {
+	& > * {
+	  flex: 0 0 100% / $count;
+	  max-width: 100% / $count;
+	}
+  }
+
+  // Framework grid generation
+//
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `$grid-columns`.
+
+@mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+	// Common properties for all breakpoints
+	%grid-column {
+	  position: relative;
+	  width: 100%;
+	  padding-right: $gutter / 2;
+	  padding-left: $gutter / 2;
+	}
+  
+	@each $breakpoint in map-keys($breakpoints) {
+	  $infix: breakpoint-infix($breakpoint, $breakpoints);
+  
+	  // Allow columns to stretch full width below their breakpoints
+	  @for $i from 1 through $columns {
+		.col#{$infix}-#{$i} {
+		  @extend %grid-column;
+		}
+	  }
+	  .col#{$infix},
+	  .col#{$infix}-auto {
+		@extend %grid-column;
+	  }
+  
+	  @include media-breakpoint-up($breakpoint, $breakpoints) {
+		// Provide basic `.col-{bp}` classes for equal-width flexbox columns
+		.col#{$infix} {
+		  flex-basis: 0;
+		  flex-grow: 1;
+		  max-width: 100%;
+		}
+  
+		@for $i from 1 through $grid-row-columns {
+		  .row-cols#{$infix}-#{$i} {
+			@include row-cols($i);
+		  }
+		}
+  
+		.col#{$infix}-auto {
+		  @include make-col-auto();
+		}
+  
+		@for $i from 1 through $columns {
+		  .col#{$infix}-#{$i} {
+			@include make-col($i, $columns);
+		  }
+		}
+  
+		.order#{$infix}-first { order: -1; }
+  
+		.order#{$infix}-last { order: $columns + 1; }
+  
+		@for $i from 0 through $columns {
+		  .order#{$infix}-#{$i} { order: $i; }
+		}
+  
+		// `$columns - 1` because offsetting by the width of an entire row isn't possible
+		@for $i from 0 through ($columns - 1) {
+		  @if not ($infix == "" and $i == 0) { // Avoid emitting useless .offset-0
+			.offset#{$infix}-#{$i} {
+			  @include make-col-offset($i, $columns);
+			}
+		  }
+		}
+	  }
+	}
+  }
+  
+  // Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
+
+// Breakpoint viewport sizes and media queries.
+//
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+//
+//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
+//
+// The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default.
+
+// Name of the next breakpoint, or null for the last breakpoint.
+//
+//    >> breakpoint-next(sm)
+//    md
+//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    md
+//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl))
+//    md
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+	$n: index($breakpoint-names, $name);
+	@return if($n != null and $n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+  }
+  
+  // Minimum breakpoint width. Null for the smallest (first) breakpoint.
+  //
+  //    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+  //    576px
+  @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+	$min: map-get($breakpoints, $name);
+	@return if($min != 0, $min, null);
+  }
+  
+  // Maximum breakpoint width. Null for the largest (last) breakpoint.
+  // The maximum value is calculated as the minimum of the next one less 0.02px
+  // to work around the limitations of `min-` and `max-` prefixes and viewports with fractional widths.
+  // See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
+  // Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
+  // See https://bugs.webkit.org/show_bug.cgi?id=178261
+  //
+  //    >> breakpoint-max(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+  //    767.98px
+  @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+	$next: breakpoint-next($name, $breakpoints);
+	@return if($next, breakpoint-min($next, $breakpoints) - .02, null);
+  }
+  
+  // Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+  // Useful for making responsive utilities.
+  //
+  //    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+  //    ""  (Returns a blank string)
+  //    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+  //    "-sm"
+  @function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+	@return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+  }
+  
+  // Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+  // Makes the @content apply to the given breakpoint and wider.
+  @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($name, $breakpoints);
+	@if $min {
+	  @media (min-width: $min) {
+		@content;
+	  }
+	} @else {
+	  @content;
+	}
+  }
+  
+  // Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+  // Makes the @content apply to the given breakpoint and narrower.
+  @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+	$max: breakpoint-max($name, $breakpoints);
+	@if $max {
+	  @media (max-width: $max) {
+		@content;
+	  }
+	} @else {
+	  @content;
+	}
+  }
+  
+  // Media that spans multiple breakpoint widths.
+  // Makes the @content apply between the min and max breakpoints
+  @mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($lower, $breakpoints);
+	$max: breakpoint-max($upper, $breakpoints);
+  
+	@if $min != null and $max != null {
+	  @media (min-width: $min) and (max-width: $max) {
+		@content;
+	  }
+	} @else if $max == null {
+	  @include media-breakpoint-up($lower, $breakpoints) {
+		@content;
+	  }
+	} @else if $min == null {
+	  @include media-breakpoint-down($upper, $breakpoints) {
+		@content;
+	  }
+	}
+  }
+  
+  // Media between the breakpoint's minimum and maximum widths.
+  // No minimum for the smallest breakpoint, and no maximum for the largest one.
+  // Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+  @mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($name, $breakpoints);
+	$max: breakpoint-max($name, $breakpoints);
+  
+	@if $min != null and $max != null {
+	  @media (min-width: $min) and (max-width: $max) {
+		@content;
+	  }
+	} @else if $max == null {
+	  @include media-breakpoint-up($name, $breakpoints) {
+		@content;
+	  }
+	} @else if $min == null {
+	  @include media-breakpoint-down($name, $breakpoints) {
+		@content;
+	  }
+	}
+  }
+  
+
+// Ascending
+// Used to evaluate Sass maps like our grid breakpoints.
+@mixin _assert-ascending($map, $map-name) {
+	$prev-key: null;
+	$prev-num: null;
+	@each $key, $num in $map {
+	  @if $prev-num == null or unit($num) == "%" or unit($prev-num) == "%" {
+		// Do nothing
+	  } @else if not comparable($prev-num, $num) {
+		@warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+	  } @else if $prev-num >= $num {
+		@warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+	  }
+	  $prev-key: $key;
+	  $prev-num: $num;
+	}
+  }
+  
+  // Starts at zero
+  // Used to ensure the min-width of the lowest breakpoint starts at 0.
+  @mixin _assert-starts-at-zero($map, $map-name: "$grid-breakpoints") {
+	$values: map-values($map);
+	$first-value: nth($values, 1);
+	@if $first-value != 0 {
+	  @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
+	}
+  }

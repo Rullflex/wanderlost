@@ -1,0 +1,57 @@
+extends modules/layout/_layout
+
+prepend head
+	title WanderLost
+	meta(name="description", content="WanderLost")
+
+block content
+	main.main
+		section.s1 
+			.s1__ibg.ibg 	
+				+picture-min(jpg, `${assets}s1-bg`, `${assets}s1-bg`)
+			.container.s1__ctn
+				a.s1__play-btn(href="#video" data-uk-toggle)
+					+icon('play-btn')
+				p.s1__play-text Watch Trailer
+				a.uk-button.s1__btn(href="#") 
+					+icon('button', primary)
+					span wishlist on steam
+				.s1__icons 
+					a(href="#")
+						+icon('fb')
+					a(href="#")
+						+icon('twitter')
+					a(href="#")
+						+icon('inst')
+					a(href="#")
+						+icon('twitch')
+				form.form(action="#")
+					p.form__title Sign-up for closed testing and news updates#[br] about the game
+					.form__input-wrap.input-wrap 
+						input.form__input.input(type="email" name="email" placeholder="Enter your email")
+						button.uk-button.form__btn(type="submit") sign me up
+		section.s2 
+			.container 
+				.s2__playgrounds
+					+icon('steam')
+					+icon('ps4')
+					+icon('xbox')
+					+icon('switch')
+				h2.s2__title Whatever you do: stay clear of...
+				p.s2__subtitle GATHER, FARM, FISH, CRAFT, BUILD, TRAP, FORTIFY, EXPLORE and#[br] LOOT your way to post-apocalyptic domination
+				p.s2__descr Thrust into the wilderness with little beyond the clothes on his back the player must navigate a hostle wilderness teeming with zombies and wildife. Finding tood, water, and sheter are three musts but can the player move beyond more survival to sustanable loving, satory, and even domination of their enviroment? The world of Wanderlost is procodurally generated. This means the map can be infinitely expiored, every new game is entirely unique, and around every corner is  something unexpected to engage the player.
+				h3.s2__screenshots-title Screenchots
+				ul.s2__screenshots-wrap
+					- for(var i = 1; i <= 9; i++)
+						li.s2__screenshots-item.ibg 
+							+picture(jpg, `${assets}s2-i${i}`, 'n', 'n')
+				a.uk-button.s2__btn(href="#") 
+					+icon('button', primary)
+					span download fankit
+				form.form(action="#")
+					.form__ibg.ibg
+						+picture(jpg, `${modules}form-bg`, 'n')
+					p.form__title Sign-up for closed testing and news updates#[br] about the game
+					.form__input-wrap.input-wrap 
+						input.form__input.input(type="email" name="email" placeholder="Enter your email")
+						button.uk-button.form__btn(type="submit") sign me up

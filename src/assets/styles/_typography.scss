@@ -1,0 +1,14 @@
+$relative-link-to-modules: "../../modules/fonts";
+
+@include font-face("Montserrat", "Montserrat", "400", "normal");
+@include font-face("Montserrat", "Montserrat-Normal", "400", "normal", $relative-link-to-modules);
+@include font-face("Montserrat", "Montserrat-Regular", "400", "normal", $relative-link-to-modules);
+
+@include font-face("Montserrat", "Montserrat-Medium", "500", "normal", $relative-link-to-modules);
+
+@include font-face("Montserrat", "Montserrat-SemiBold", "600", "normal", $relative-link-to-modules);
+
+@include font-face("Montserrat", "Montserrat-Bold", "700", "normal", $relative-link-to-modules);
+
+
+@include font-face("ToJapan", "ToJapan", "400", "normal", $relative-link-to-modules);

@@ -1,0 +1,52 @@
+
+.slide {
+    &dots {
+        justify-content: center;
+        margin-left: 0;
+        &>* {
+            padding: 0 0.3125rem;
+            &>* {
+                width: 1.3125rem;
+                height: 1.3125rem;
+                border-width: 0.125rem;
+                border-style: solid;
+                border-color: $primary;
+                background: transparent;
+                &:hover, &:focus {
+                    background-color: link-hover($primary);
+                }
+            }
+        }
+        &>.uk-active>* {
+            background-color: $primary;
+        }
+        &--white {
+            &>* {
+                &>* {
+                    border-color: white;
+                }
+            }
+        }
+        &--yellow {
+            &>* {
+                &>* {
+                    border-color: white;
+                    &:hover, &:focus {
+                        background-color: link-hover($yellow);
+                    }
+                }
+            }
+            &>.uk-active>* {
+                background-color: $yellow;
+            }
+        }
+    }
+    &nav {
+        svg {
+            width: 1.5rem;
+            path {
+                stroke: white;
+            }
+        }
+    }
+}

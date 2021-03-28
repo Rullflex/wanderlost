@@ -1,0 +1,27 @@
+include _mixins
+include _vars
+
+doctype html
+html(lang="en")
+	head
+		block head
+			meta(charset="utf-8")
+			meta(name="format-detection" content="telephone=no")
+			meta(content="ie=edge" http-equiv="x-ua-compatible")
+			meta(property="og:image" content=`/ogimage.jpg`)
+			
+			link(rel="stylesheet" href!=stylesPath)
+
+			include includes/_favicon
+			include includes/_metrika
+	body
+		.app-wrapper
+			block header
+				include widgets/_header
+			block content
+			block footer
+				include widgets/_footer
+			block popup
+				include widgets/_popups
+		block scripts
+			script(defer src!=scriptsPath)
